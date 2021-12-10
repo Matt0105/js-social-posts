@@ -1,4 +1,4 @@
-function postGenerator(container, obj) {
+function postGenerator(container, posts) {
     
     for(let i = 0; i < posts.length; i++) {
 
@@ -18,7 +18,12 @@ function postGenerator(container, obj) {
         img.classList.add("profile-pic");
         img.src = `https://unsplash.it/300/300?image=${posts[i].profileImg}`;
 
-        postMetaIcon.append(img);
+        if(posts[i].profileImg == "" || posts[i].profileImg == null) {
+            postMetaIcon.innerHTML = posts[i].author[0] + posts[i].author[posts[i].author.indexOf(" ")+1];
+        }
+        else {
+            postMetaIcon.append(img);
+        }
 
         const postMetaData = document.createElement("div");
         postMetaData.classList.add("post-meta__data");
@@ -29,7 +34,7 @@ function postGenerator(container, obj) {
 
         const postMetaTime = document.createElement("div");
         postMetaTime.classList.add("post-meta__time");
-        postMetaTime.append(posts[i].time.month + "/" + posts[i].time.day + "/" + posts[i].time.year);
+        postMetaTime.append(posts[i].time.day + "/" + posts[i].time.month + "/" + posts[i].time.year);
 
         postMetaData.append(postMetaAuthor);
         postMetaData.append(postMetaTime);
@@ -99,14 +104,14 @@ function postGenerator(container, obj) {
         });
 
   
-}
+    }
 }
 
 const posts = [
 
     {
         author: "Phil Mangione", 
-        profileImg: "15",
+        profileImg: "2",
         text: "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.", 
         postImg: "1084",
         likes: 80, 
@@ -118,7 +123,7 @@ const posts = [
     },
     {
         author: "Matteo Gallitano", 
-        profileImg: "16",
+        profileImg: null,
         text: "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.", 
         postImg: "",
         likes: 120, 
